@@ -1,0 +1,17 @@
+{
+  "name": "jrmadsen67/laravel-feature-test-generator",
+  "description": "Cascading model updates for Laravel.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jeff Madsen",
+      "email": "jrmadsen67@gmail.com",
+      "homepage": "http://codebyjeff.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "jrmadsen67\\FeatureTestGenerator\\": "src/"
+    }
+  }
+}
