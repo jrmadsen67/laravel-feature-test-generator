@@ -1,0 +1,94 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use App\Post;
+
+/**
+ * @group post
+ */
+
+class PostTest extends TestCase
+{
+
+    use RefreshDatabase;
+
+    /** @test **/
+    public function can_access_index(){
+      $response = $this->get(route('posts.index'));
+
+      $response->assertStatus(200);
+    }
+
+    /** @test **/
+    public function can_access_show(){
+        $item = factory(Post::class)->create();
+
+        $response = $this->get(route('posts.show', $item));
+
+        $response->assertStatus(200);
+    }
+
+    /** @test **/
+    public function can_access_create(){
+        $response = $this->get(route('posts.create'));
+
+        $response->assertStatus(200);
+    }
+
+    /** @test **/
+    public function can_store_post(){
+
+        $item = factory(Post::class)->make();
+
+        $response = $this->post(route('posts.store'), $item->toArray());
+
+        $this->assertDatabaseHas('posts', $item->toArray());
+    }
+
+    /** @test **/
+    public function can_access_edit(){
+        $item = factory(Post::class)->create();
+
+        $response = $this->get(route('posts.edit', $item));
+
+        $response->assertStatus(200);
+    }
+
+    /** @test **/
+    public function can_update_post(){
+
+        $item = factory(Post::class)->create();
+
+        $this->assertDatabaseHas('posts', $item->toArray());
+
+        $data = $item->toArray();
+
+        // Change your data here
+        $data['created_at'] = now()->addDay();
+
+        $response = $this->put(route('posts.update', $item), $data);
+
+        $this->assertEquals($data['created_at'], $item->fresh()->created_at);
+
+        $response->assertRedirect(route('posts.edit', $item));
+    }
+
+    /** @test **/
+    public function can_destroy_post(){
+
+        $item = factory(Post::class)->create();
+
+        $this->assertDatabaseHas('posts', $item->toArray());
+
+        $response = $this->delete(route('posts.destroy', $item));
+
+        $this->assertDatabaseMissing('posts', $item->toArray());
+
+        $response->assertRedirect(route('posts.index'));
+    }
+}
