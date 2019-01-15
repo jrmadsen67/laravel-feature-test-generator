@@ -15,9 +15,10 @@ class TestGeneratorServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
 
-//            $this->publishes([
-//                __DIR__.'/../config/config.php' => config_path('debug-server.php'),
-//            ], 'config');
+
+            $this->publishes([
+                __DIR__.'/stubs/resource_feature_tests.stub' => config_path('feature-test-generator/stubs/resource_feature_tests.stub')
+            ], 'stubs');
 
             $this->commands([
                 TestGeneratorCommand::class,
@@ -32,15 +33,5 @@ class TestGeneratorServiceProvider extends ServiceProvider
      */
     public function register()
     {
-//        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'debug-server');
-
-//        $this->app->bind('feature-test:generate', TestGeneratorCommand::class);
-
-//        $this->commands([
-//            'command.dumpserver',
-//        ]);
-
-//        $host = $this->app['config']->get('debug-server.host');
-
     }
 }

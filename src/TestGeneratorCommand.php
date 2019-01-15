@@ -57,12 +57,12 @@ class TestGeneratorCommand extends Command
         $path = base_path('tests/Feature');
         $this->replaceTest($path, $resource);
 
-
-        $this->info($resource);
-        $this->info('Test created successfully!');
+        $this->info($resource . ' test created successfully!');
     }
 
     protected function replaceTest($path, $resource){
+
+        $stub_file = $this->getStubFile();
 
         $stub = str_replace(
             [
@@ -78,11 +78,19 @@ class TestGeneratorCommand extends Command
                 $this->getAppNamespace(),
                 str_plural($resource),
                 str_plural($resource)
-            ], 
-            $this->files->get(__DIR__.'/stubs/resource_feature_tests.stub')
+            ],
+            $stub_file
         );
 
         $path .=  '/' . studly_case($resource) . 'Test.php';
         $this->files->put($path, $stub);
+    }
+
+    protected function getStubFile(){
+        if(file_exists(base_path('config/feature-test-generator/stubs/resource_feature_tests.stub'))){
+            return $this->files->get(base_path('config/feature-test-generator/stubs/resource_feature_tests.stub'));
+        }
+
+        return $this->files->get(__DIR__.'/stubs/resource_feature_tests.stub');
     }
 }
