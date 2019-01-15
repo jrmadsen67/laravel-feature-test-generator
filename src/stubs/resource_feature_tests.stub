@@ -25,6 +25,16 @@ class {{class}}Test extends TestCase
     }
 
     /** @test **/
+    public function can_access_show(){
+        $item = factory({{class}}::class)->create();
+
+        $response = $this->get(route('{{routeBase}}.show', $item));
+
+        $response->assertStatus(200);
+    }
+
+
+    /** @test **/
     public function can_access_create(){
         $response = $this->get(route('{{routeBase}}.create'));
 
