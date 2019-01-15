@@ -22,7 +22,7 @@ where `Post` is the name of your resource (typically the same as the Model you a
 
 That's it! Or can be - you have an additional option.
 
-The above will run what I consider to be very simple but complete resource tests that cover index, create, store, edit, update and destroy. If you have some additional tests that you always like to run you may publish that stub and extend:
+The above will run what I consider to be very simple but complete resource tests that cover index, show, create, store, edit, update and destroy. If you have some additional tests that you always like to run you may publish that stub and extend:
 
 `artisan vendor:publish --tag=stubs`
 
