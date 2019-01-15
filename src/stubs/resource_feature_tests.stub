@@ -1,0 +1,85 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use {{namespace}}{{class}};
+
+/**
+ * @group {{resource}}
+ */
+
+class {{class}}Test extends TestCase
+{
+
+    use RefreshDatabase;
+
+    /** @test **/
+    public function can_access_index(){
+      $response = $this->get(route('{{routeBase}}.index'));
+
+      $response->assertStatus(200);
+    }
+
+    /** @test **/
+    public function can_access_create(){
+        $response = $this->get(route('{{routeBase}}.create'));
+
+        $response->assertStatus(200);
+    }
+
+    /** @test **/
+    public function can_store_{{resource}}(){
+
+        $item = factory({{class}}::class)->make();
+
+        $response = $this->post(route('{{routeBase}}.store'), $item->toArray());
+
+        $this->assertDatabaseHas('{{tablename}}', $item->toArray());
+    }
+
+    /** @test **/
+    public function can_access_edit(){
+        $item = factory({{class}}::class)->create();
+
+        $response = $this->get(route('{{routeBase}}.edit', $item));
+
+        $response->assertStatus(200);
+    }
+
+    /** @test **/
+    public function can_update_{{resource}}(){
+
+        $item = factory({{class}}::class)->create();
+
+        $this->assertDatabaseHas('{{tablename}}', $item->toArray());
+
+        $data = $item->toArray();
+
+        // Change your data here
+        $data['created_at'] = now()->addDay();
+
+        $response = $this->put(route('{{routeBase}}.update', $item), $data);
+
+        $this->assertEquals($data['created_at'], $item->fresh()->created_at);
+
+        $response->assertRedirect(route('{{routeBase}}.edit', $item));
+    }
+
+    /** @test **/
+    public function can_destroy_{{resource}}(){
+
+        $item = factory({{class}}::class)->create();
+
+        $this->assertDatabaseHas('{{tablename}}', $item->toArray());
+
+        $response = $this->delete(route('{{routeBase}}.destroy', $item));
+
+        $this->assertDatabaseMissing('{{tablename}}', $item->toArray());
+
+        $response->assertRedirect(route('{{routeBase}}.index'));
+    }
+}
