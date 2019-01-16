@@ -18,7 +18,9 @@ to bring the generator into your application. You may then create a set of featu
 
 `artisan feature-test:generate Post`
 
-where `Post` is the name of your resource (typically the same as the Model you are building around).
+where `Post` is the name of your resource (typically the same as the Model you are building around). 
+
+The `SampleFile` will show you what the default for that comand will produce.
 
 That's it! Or can be - you have an additional option.
 
