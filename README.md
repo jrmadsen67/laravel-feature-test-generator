@@ -12,7 +12,7 @@ The goal is to get people past the "takes too much time" or "I'm not sure where 
 
 Start with a composer pull:
 
-`composer require jrmadsen67/laravel-cascade-updates`
+`composer require jrmadsen67/laravel-feature-test-generator --dev`
 
 to bring the generator into your application. You may then create a set of feature tests with:
 
