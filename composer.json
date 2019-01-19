@@ -13,5 +13,6 @@
     "psr-4": {
       "jrmadsen67\\FeatureTestGenerator\\": "src/"
     }
-  }
+  },
+  "minimum-stability": "dev",
 }
