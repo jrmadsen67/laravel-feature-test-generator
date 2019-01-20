@@ -13,5 +13,12 @@
     "psr-4": {
       "jrmadsen67\\FeatureTestGenerator\\": "src/"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "jrmadsen67\\FeatureTestGenerator\\TestGeneratorServiceProvider"
+      ]
+    }
   }
 }
